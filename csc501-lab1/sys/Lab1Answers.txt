@@ -1,0 +1,28 @@
+Question 1)
+
+Aging scheduler - Advantages:
+In aging scheduler, the priorities of processes that are waiting in the ready queue will be gradually increased. This way processes with lower priority tend to get executed easily as their priority gets increased after waiting for some time in the ready queue.
+
+Aging scheduler - Disadvantages:
+Using aging scheduler, the response time of a  high priority processes tends to increase as the lower priority processes also compete for the cpu at regular intervals. It can badly hamper the performance of a real time system.
+
+
+Default scheduler - Advantages:
+With the default xinu scheduler, processes with higher priority gets to execute first. Once the high priority processes finish execution then only the low priority processes gets to execute. This is very important aspect of real time systems as the response time for higher priority processes is very critical.
+
+Default scheduler - Disadvantages:
+Response times for the low priority processes is very less. Also it may lead to starvation for the low priority processes.
+
+Linux-like scheduler - Advantages:
+Processes with high priority will get the cpu first. At the same time since the length of an epoch is bounded by a max value, processes with low priority will not have to wait forever. Enduser processes are typically I/O bound and such processes get higher preference because of the higher goodness value.
+
+
+Linux-like scheduler - Disadvantages:
+The scheduling algorithm is very complex. If a large number of processes exist in the system, a lot of cpu cycles might get wasted in selecting the new process itself. It might reduce the system performance, if the rescheduler gets called very frequently. Also, I/O bound background processes which doesn't need shorter response time tend to get a lot of priority.
+
+
+Question 2)
+
+In aging scheduler, the system starts with the NULL process(priority 0). As long as there are processes with higher priority, it will never get a chance to execute. Even though it will be there in the ready queue all the time, its priority will not get incremented with time unlike other processes.
+
+In linux-like scheduler, the goodness of null process is always zero. Since the goodness of all the processes in ready queue at the end of every epoch will also be zero, the null process will gets selected. Hence, a new epoch always starts with the null process execution.
